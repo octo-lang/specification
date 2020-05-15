@@ -8,9 +8,12 @@
 \usepackage{empheq}
 \begin{document}
 \begin{empheq}[box=\fbox]{align}
-	letter&::= a \ldots z \nonumber\\
-	ident\_char&::= letter \enspace|\enspace '\,'\,' \enspace|\enspace '\_' 
-	\enspace|\enspace A \ldots Z\enspace|\enspace 0\ldots 9\nonumber\\
-	identifier&::= letter\enspace\{ ident\_char\}\nonumber
+	letter::&= a \ldots z \nonumber\\
+	identifier::&= letter\enspace\{letter
+	\enspace|\enspace'\,'\,' \enspace|\enspace'\_' 
+		\enspace|\enspace A\ldots Z\enspace|\enspace 0 \ldots 9\}\nonumber\\
+	expression::&=lambda\\
+	&\enspace|\\
+	lambda::&=\lambda\enspace\{identifier\}+\enspace\rightarrow\enspace expression\nonumber
 \end{empheq}
 \end{document}
