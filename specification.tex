@@ -6,14 +6,42 @@
 \usepackage[margin=2cm]{geometry}
 \usepackage{amsmath}
 \usepackage{empheq}
+\setlength{\fboxsep}{10pt}
 \begin{document}
 \begin{empheq}[box=\fbox]{align}
-	letter::&= a \ldots z \nonumber\\
-	identifier::&= letter\enspace\{letter
+	lower\_letter::&= a \ldots z\nonumber\\
+	\nonumber\\
+	upper\_letter::&= A \ldots Z\nonumber\\
+	\nonumber\\
+	digit ::&= 0 \ldots 9\nonumber\\\nonumber\\
+	identifier\_character::&=\{\enspace lower\_letter\nonumber\\
+	&\enspace|\enspace upper\_letter
 	\enspace|\enspace'\,'\,' \enspace|\enspace'\_' 
-		\enspace|\enspace A\ldots Z\enspace|\enspace 0 \ldots 9\}\nonumber\\
-	expression::&=lambda\\
-	&\enspace|\\
-	lambda::&=\lambda\enspace\{identifier\}+\enspace\rightarrow\enspace expression\nonumber
+		\enspace|\enspace digit\enspace\}*\enspace\nonumber\\
+		\nonumber\\
+	identifier::&= lower\_letter\enspace\{\enspace identifier\_character\enspace\}*\enspace\nonumber\\
+	\nonumber\\
+	tidentifier::&= upper\_letter\enspace\{\enspace identifier\_character\enspace\}*\enspace\nonumber\\
+	\nonumber\\
+	exp::&=\lambda\enspace\{\enspace identifier\enspace\}+\enspace\rightarrow\enspace exp &&
+	\text{lambda abstraction}\nonumber\\
+	&\enspace|\enspace  exp \enspace exp && \text{application}\nonumber\\
+	&\enspace|\enspace identifier && \text{variable}\nonumber\\
+	&\enspace|\enspace exp \enspace where \enspace \{\enspace decl\enspace\}+
+	&&\text{where clauses}\nonumber\\
+	&\enspace|\enspace case \enspace exp \enspace of \enspace
+	\{\enspace exp \rightarrow exp\enspace\}+&&\text{case}\nonumber\\
+	\nonumber\\
+	decl::&=\{\enspace identifier\enspace\}+ = exp\nonumber\\
+	\nonumber\\
+	top\_decl::&= decl \nonumber\\
+	&\enspace|\enspace type \enspace identifier = \nonumber\\ &
+	 \enspace\enspace\> tidentifier\enspace \{\enspace identifier\enspace\}* 
+	\nonumber\\
+&\enspace\enspace\>
+	\{\enspace|\enspace tidentifier \enspace\{\enspace identifier\enspace\}*\enspace\}* \nonumber\\
+	\nonumber\\
+	\enspace\{\enspace\ldots\enspace\}*\enspace \text{0 or more times}\nonumber\\
+	\enspace\{\enspace\ldots\enspace\}+\enspace \text{1 or more times}\nonumber
 \end{empheq}
 \end{document}
