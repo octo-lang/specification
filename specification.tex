@@ -9,37 +9,35 @@
 \setlength{\fboxsep}{10pt}
 \begin{document}
 \begin{empheq}[box=\fbox]{align}
-	lower\_letter::&= a \ldots z\nonumber\\
+	lower\_letter\>::&=\enspace a \ldots z\nonumber\\
 	\nonumber\\
-	upper\_letter::&= A \ldots Z\nonumber\\
+	upper\_letter\>::&=\enspace A \ldots Z\nonumber\\
 	\nonumber\\
-	digit ::&= 0 \ldots 9\nonumber\\\nonumber\\
-	identifier\_character::&=\{\enspace lower\_letter\nonumber\\
-	&\enspace|\enspace upper\_letter
+	digit\>::&=\enspace 0 \ldots 9\nonumber\\\nonumber\\
+	ident\_char\>::&=\enspace\{\enspace lower\_letter\nonumber\\
+	&\enspace\enspace\enspace\enspace|\enspace upper\_letter
 	\enspace|\enspace'\,'\,' \enspace|\enspace'\_' 
 		\enspace|\enspace digit\enspace\}*\enspace\nonumber\\
 		\nonumber\\
-	identifier::&= lower\_letter\enspace\{\enspace identifier\_character\enspace\}*\enspace\nonumber\\
+	ident\>::&=\enspace lower\_letter\enspace\{\enspace ident\_char\enspace\}*\enspace\nonumber\\
 	\nonumber\\
-	tidentifier::&= upper\_letter\enspace\{\enspace identifier\_character\enspace\}*\enspace\nonumber\\
+	tident\>::&=\enspace upper\_letter\enspace\{\enspace ident\_char\enspace\}*\enspace\nonumber\\
 	\nonumber\\
-	exp::&=\lambda\enspace\{\enspace identifier\enspace\}+\enspace\rightarrow\enspace exp &&
+	exp\>::&=\enspace\lambda\enspace\{\enspace ident\enspace\}+\enspace\rightarrow\enspace exp &&
 	\text{lambda abstraction}\nonumber\\
-	&\enspace|\enspace  exp \enspace exp && \text{application}\nonumber\\
-	&\enspace|\enspace identifier && \text{variable}\nonumber\\
-	&\enspace|\enspace exp \enspace where \enspace \{\enspace decl\enspace\}+
+	&\enspace|\enspace\enspace exp \enspace exp && \text{application}\nonumber\\
+	&\enspace|\enspace\enspace ident && \text{variable}\nonumber\\
+	&\enspace|\enspace\enspace exp \enspace \text{where} \enspace \{\enspace decl\enspace\}+
 	&&\text{where clauses}\nonumber\\
-	&\enspace|\enspace case \enspace exp \enspace of \enspace
+	&\enspace|\enspace\enspace \text{case} \enspace exp \enspace \text{of} \enspace
 	\{\enspace exp \rightarrow exp\enspace\}+&&\text{case}\nonumber\\
 	\nonumber\\
-	decl::&=\{\enspace identifier\enspace\}+ = exp\nonumber\\
+	decl\>::&=\enspace\{\enspace ident\enspace\}+ = exp\nonumber\\
 	\nonumber\\
-	top\_decl::&= decl \nonumber\\
-	&\enspace|\enspace type \enspace identifier = \nonumber\\ &
-	 \enspace\enspace\> tidentifier\enspace \{\enspace identifier\enspace\}* 
-	\nonumber\\
-&\enspace\enspace\>
-	\{\enspace|\enspace tidentifier \enspace\{\enspace identifier\enspace\}*\enspace\}* \nonumber\\
+	top\_decl\>::&=\enspace decl \nonumber\\
+	&\enspace|\enspace\enspace \text{type} \enspace ident = \nonumber\\ &
+	 \enspace\enspace\enspace\> tident\enspace \{\enspace ident\enspace\}*
+	\{\enspace|\enspace tident \enspace\{\enspace ident\enspace\}*\enspace\}* \nonumber\\
 	\nonumber\\
 	\enspace\{\enspace\ldots\enspace\}*\enspace \text{0 or more times}\nonumber\\
 	\enspace\{\enspace\ldots\enspace\}+\enspace \text{1 or more times}\nonumber
