@@ -6,40 +6,44 @@
 \usepackage[margin=2cm]{geometry}
 \usepackage{amsmath}
 \usepackage{empheq}
+\newcommand{\listt}[1]{\{\enspace #1\enspace\}*}
+\newcommand{\listp}[1]{\{\enspace #1\enspace\}+}
+\newcommand{\equ}{\>::&=\enspace}
+\newcommand{\pipe}{\enspace|\enspace\enspace}
 \setlength{\fboxsep}{10pt}
 \begin{document}
 \begin{empheq}[box=\fbox]{align}
-	lower\_letter\>::&=\enspace a \ldots z\nonumber\\
+	lower\_letter\equ a \ldots z\nonumber\\
 	\nonumber\\
-	upper\_letter\>::&=\enspace A \ldots Z\nonumber\\
+	upper\_letter\equ A \ldots Z\nonumber\\
 	\nonumber\\
-	digit\>::&=\enspace 0 \ldots 9\nonumber\\\nonumber\\
-	ident\_char\>::&=\enspace\{\enspace lower\_letter\nonumber\\
+	digit\equ 0 \ldots 9\nonumber\\\nonumber\\
+	ident\_char\equ\{\enspace lower\_letter\nonumber\\
 	&\enspace\enspace\enspace\enspace|\enspace upper\_letter
 	\enspace|\enspace'\,'\,' \enspace|\enspace'\_' 
 		\enspace|\enspace digit\enspace\}*\enspace\nonumber\\
 		\nonumber\\
-	ident\>::&=\enspace lower\_letter\enspace\{\enspace ident\_char\enspace\}*\enspace\nonumber\\
+	ident\equ lower\_letter\enspace\listt{ident\_char}\nonumber\\
 	\nonumber\\
-	tident\>::&=\enspace upper\_letter\enspace\{\enspace ident\_char\enspace\}*\enspace\nonumber\\
+	tident\equ upper\_letter\enspace\listt{ident\_char}\enspace\nonumber\\
 	\nonumber\\
-	exp\>::&=\enspace\lambda\enspace\{\enspace ident\enspace\}+\enspace\rightarrow\enspace exp &&
+	exp\equ\lambda\enspace\listp{ident}\enspace\rightarrow\enspace exp &&
 	\text{lambda abstraction}\nonumber\\
-	&\enspace|\enspace\enspace exp \enspace exp && \text{application}\nonumber\\
-	&\enspace|\enspace\enspace ident && \text{variable}\nonumber\\
-	&\enspace|\enspace\enspace exp \enspace \text{where} \enspace \{\enspace decl\enspace\}+
+	&\pipe exp \enspace exp && \text{application}\nonumber\\
+	&\pipe ident && \text{variable}\nonumber\\
+	&\pipe exp \enspace \text{where} \enspace \listp{decl}
 	&&\text{where clauses}\nonumber\\
-	&\enspace|\enspace\enspace \text{case} \enspace exp \enspace \text{of} \enspace
-	\{\enspace exp \rightarrow exp\enspace\}+&&\text{case}\nonumber\\
+	&\pipe \text{case} \enspace exp \enspace \text{of} \enspace
+	\listp{exp \rightarrow exp}&&\text{case}\nonumber\\
 	\nonumber\\
-	decl\>::&=\enspace\{\enspace ident\enspace\}+ = exp\nonumber\\
+	decl\equ\{\enspace ident\enspace\}+ = exp\nonumber\\
 	\nonumber\\
-	top\_decl\>::&=\enspace decl \nonumber\\
-	&\enspace|\enspace\enspace \text{type} \enspace ident = \nonumber\\ &
-	 \enspace\enspace\enspace\> tident\enspace \{\enspace ident\enspace\}*
-	\{\enspace|\enspace tident \enspace\{\enspace ident\enspace\}*\enspace\}* \nonumber\\
+	top\_decl\equ decl \nonumber\\
+	&\pipe \text{type} \enspace ident = \nonumber\\ &
+	 \enspace\enspace\enspace\> tident\enspace \listt{ident}
+	\{\enspace|\enspace tident \enspace\listt{ident}\enspace\}* \nonumber\\
 	\nonumber\\
-	\enspace\{\enspace\ldots\enspace\}*\enspace \text{0 or more times}\nonumber\\
-	\enspace\{\enspace\ldots\enspace\}+\enspace \text{1 or more times}\nonumber
+	\listt{\ldots}\enspace \text{0 or more times}\nonumber\\
+	\listp{\ldots}\enspace \text{1 or more times}\nonumber
 \end{empheq}
 \end{document}
